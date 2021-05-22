@@ -1,0 +1,97 @@
+1)Testing correctness
+
+1.no parenthesized test
+false
+2 + 4 * 6 - 2
+Prefix: - + 2 * 4 6 2 
+Postfix: 2 4 6 * + 2 - 
+Fully parenthesized: ((2+(4*6))-2)
+-----------------
+
+we calculate input expression with following order.
+4 * 6 = 24
+2 + 24 = 26
+26 - 2 = 24
+output result expression shows following order
+first->4*6 = 24
+next->2 + 24 = 26
+next->26 - 2 = 24
+so output is correct!
+
+2.variable test
+false
+node1 + node2 * ( node4 - node5) - node6
+Prefix: - + node1 * node2 - node4 node5 node6 
+Postfix: node1 node2 node4 node5 - * + node6 - 
+Fully parenthesized: ((node1+(node2*(node4-node5)))-node6)
+-----------------
+
+we calculate input expression with following order.
+node4 - node5 = val1
+node2 * val = val2
+node1+val2=val3
+val3-node6=result
+output result expression shows same order above.
+so output is correct!
+
+
+3.one bracket test
+true
+2 + 3 * ( 6 / 2 ) - 6
+Prefix: - + 2 * 3 / 6 2 6 
+Postfix: 2 3 6 2 / * + 6 - 
+Fully parenthesized: ((2+(3*(6/2)))-6)
+-----------------
+Evaluated: 5.0
+
+we calculate expression with following order
+6/2,3 *(6/2),2+3*(6/2),2 + 3 * ( 6 / 2 ) - 6
+output shows same order.
+and in input expression, 6/2=3.3*3=9,2+9=11,11-6=5
+this is same as output.
+so output is correct!
+
+4.two brackets test
+true
+7 - 5 * ( 3 - 2) * ( 3 + 5)
+Prefix: - 7 * * 5 - 3 2 + 3 5 
+Postfix: 7 5 3 2 - * 3 5 + * - 
+Fully parenthesized: (7-((5*(3-2))*(3+5)))
+-----------------
+Evaluated: -33.0
+
+output calculation order is same as input calculation order.
+and input calcuation result is -33.
+it's same as output Evaluated value.
+so it's correct!
+
+5.bracket in bracket test
+
+true
+7 - (5 * ( 3 - 2) * 3 + 5)
+Prefix: - 7 + * * 5 - 3 2 3 5 
+Postfix: 7 5 3 2 - * 3 * 5 + - 
+Fully parenthesized: (7-(((5*(3-2))*3)+5))
+-----------------
+Evaluated: -13.0
+
+output calculation order is same as input calculation order.
+and input calcuation result is -13.
+it's same as output Evaluated value.
+so it's correct!
+
+2)Runtimes
+- processExpression
+N : (n + 2n^2)*nlog(n) = 2n^3*log(n) + n^2*log(n)
+worst case(when step1->0):(2n^2)*nlog(n) = 2*n^3*log(n)
+best case(same as N):(n + 2n^2)*nlog(n) = 2n^3*log(n) + n^2*log(n)
+
+- getFullyExpression
+N : nlog(n)
+worst-case (same as N): nlog(n)
+best-case (same as N): nlog(n)
+
+- evaluateNode
+N : nlog(n)
+worst-case (same as N): nlog(n)
+best-case (same as N): nlog(n)
